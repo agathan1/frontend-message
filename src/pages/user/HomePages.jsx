@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import CardMessage from "../../components/molecule/CardMessage";
 import FeatureCard from "../../components/molecule/FeatureCard";
 import Marquee from "react-fast-marquee";
@@ -7,44 +7,6 @@ import { getMessage } from "../../query/useMessage/getMessage";
 
 // line-clamp-2
 
-const dataDummy = [
-  {
-    id: 1,
-    send_to: "Agathan",
-    message:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci, veritatis nam. Sint amet minima, officia deleniti ducimus fugiat natus ea!",
-  },
-  {
-    id: 1,
-    send_to: "Agathan",
-    message:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci, veritatis nam. Sint amet minima, officia deleniti ducimus fugiat natus ea!",
-  },
-  {
-    id: 1,
-    send_to: "Agathan",
-    message:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci, veritatis nam. Sint amet minima, officia deleniti ducimus fugiat natus ea!",
-  },
-  {
-    id: 1,
-    send_to: "Agathan",
-    message:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci, veritatis nam. Sint amet minima, officia deleniti ducimus fugiat natus ea!",
-  },
-  {
-    id: 1,
-    send_to: "Agathan",
-    message:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci, veritatis nam. Sint amet minima, officia deleniti ducimus fugiat natus ea!",
-  },
-  {
-    id: 1,
-    send_to: "Agathan",
-    message:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci, veritatis nam. Sint amet minima, officia deleniti ducimus fugiat natus ea!",
-  },
-];
 
 const featureMenu = [
   {
@@ -136,12 +98,14 @@ export default function HomePages() {
         >
           <div className="flex gap-4 px-4">
             {allMessage?.data.map((data, index) => (
-              <CardMessage
-                key={`left-${index}`}
-                send_to={data.send_to}
-                message={data.message}
-                createDate={data.createdAt}
-              />
+              <Link to={`/message/${data._id}`} key={index}>
+                <CardMessage
+                  key={`left-${index}`}
+                  send_to={data.send_to}
+                  message={data.message}
+                  createDate={data.createdAt}
+                />
+              </Link>
             ))}
           </div>
         </Marquee>
@@ -149,13 +113,15 @@ export default function HomePages() {
         {/* Marquee ke kanan */}
         <Marquee speed={40} gradient={false} direction="right" className="mt-4">
           <div className="flex gap-4 px-4">
-            {allMessage?.data.map((data, index) => (
-              <CardMessage
-                key={`right-${index}`}
-                send_to={data.send_to}
-                message={data.message}
-                createDate={data.createdAt}
-              />
+            {(allMessage?.data)?.map((data, index) => (
+              <Link to={`/message/${data._id}`} key={index}>
+                <CardMessage
+                  key={`right-${index}`}
+                  send_to={data.send_to}
+                  message={data.message}
+                  createDate={data.createdAt}
+                />
+              </Link>
             ))}
           </div>
         </Marquee>
