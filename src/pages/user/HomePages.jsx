@@ -95,33 +95,34 @@ export default function HomePages() {
           gradientWidth={100}
           gradientColor="#fff"
           className="mt-10"
+          pauseOnClick
         >
           <div className="flex gap-4 px-4">
             {allMessage?.data.map((data, index) => (
-              <Link to={`/message/${data._id}`} key={index}>
+              // <Link to={`/message/${data._id}`} key={index}>
                 <CardMessage
                   key={`left-${index}`}
                   send_to={data.send_to}
                   message={data.message}
                   createDate={data.createdAt}
                 />
-              </Link>
+              // {/* </Link> */}
             ))}
           </div>
         </Marquee>
 
         {/* Marquee ke kanan */}
-        <Marquee speed={40} gradient={false} direction="right" className="mt-4">
+        <Marquee speed={40} gradient={false} direction="right" className="mt-4" pauseOnClick>
           <div className="flex gap-4 px-4">
             {(allMessage?.data)?.map((data, index) => (
-              <Link to={`/message/${data._id}`} key={index}>
+              // <Link to={`/message/${data._id}`} key={index}>
                 <CardMessage
                   key={`right-${index}`}
                   send_to={data.send_to}
                   message={data.message}
                   createDate={data.createdAt}
                 />
-              </Link>
+              // </Link>
             ))}
           </div>
         </Marquee>
