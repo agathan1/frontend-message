@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Warning from "../../components/molecule/Warning.jsx";
 import { Button } from "flowbite-react";
 import { getMessage } from "../../query/useMessage/getMessage.js";
@@ -11,6 +11,7 @@ export default function SearchPage() {
   const [isResultSearch, setIsResultSearch] = useState([]);
   const [search, setSearch] = useState("");
   const [isSearch, setIsSearch] = useState(false);
+  const currentNameInSearch = useRef(""); // untuk memperbarui/menangkap nama yang sedang di cari
 
   const { allMessage, isLoading, error } = getMessage({
     queryKey: ["getAllMessageUser"],
@@ -33,7 +34,8 @@ export default function SearchPage() {
         .replace(regexForData, "")
         .includes(search.toLowerCase().replace(regexForData, ""));
     });
-    console.log("filteredMessage", filteredMessage);
+    currentNameInSearch.current = search;
+    // console.log("filteredMessage", filteredMessage);
     setIsResultSearch(filteredMessage);
     setSearchLoading(false);
   };
@@ -47,9 +49,30 @@ export default function SearchPage() {
   };
 
   const handleChange = (e) => {
-    console.log(e.target.value);
     setSearch(e.target.value);
   };
+
+  useEffect(() => {
+    if (search.trim() === "") {
+      setIsSearch(false);
+      currentNameInSearch.current = "";
+    }
+  }, [search]);
+
+  // useEffect(() => {
+  //   if (isSearch) {
+  //     let currentName =
+  //   }
+  // }, [isSearch]);
+
+  // useEffect(() => {
+  //   if (searchTerm.trim() === "") {
+  //     setFilteredData(dataReal);
+  //     setItemsToShow(5); // Reset jumlah item ke default
+  //   }
+  // }, [searchTerm, dataReal]);
+
+  // console.log("isResultSearch", isResultSearch);
 
   return (
     <>
@@ -77,20 +100,27 @@ export default function SearchPage() {
 
         {/* CONDITIONAL RENDERING JIKA HASIL PENCARIAN ADA DAN TAMPILAN AWALNYA */}
         {/* JIKA ISEARCH = TRUE MAKA AKAN MENAMPILKAN DATA DARI "ISRESULTSEARCH". NAMUN, JIKA ISSEARCH = FALSE MAKA AKAN MENAMPILKAN DATA DARI "SURAH" */}
-        <section className="mt-8 grid grid-cols-2  max-[600px]:grid-cols-1 gap-4 px-4 mx-auto">
+        <section className="mt-8 grid grid-cols-2  max-[600px]:grid-cols-1 max-[600px]:px-4 gap-4 px-4 mx-auto">
           {(isSearch ? isResultSearch : allMessage?.data)?.map((item) => (
-            <div className="mb-4">
-              <Link to={`/message/${item._id}`}>
-                <CardMessage
-                  send_to={item.send_to}
-                  message={item.message}
-                  createDate={item.createdAt}
-                />
-              </Link>
-            </div>
+            <>
+              <div className="mb-4">
+                <Link to={`/message/${item._id}`}>
+                  <CardMessage
+                    send_to={item.send_to}
+                    message={item.message}
+                    createDate={item.createdAt}
+                  />
+                </Link>
+              </div>
+            </>
           ))}
         </section>
 
+        {isSearch && isResultSearch.length === 0 && (
+          <p className="text-center">
+            Tidak ada pesan untuk <span className="font-bold font-poppins text-secondary">"{currentNameInSearch.current}" </span>
+          </p>
+        )}
         {isLoading &&
           [...Array(10)].map((_, index) => (
             <Skeleton
@@ -106,23 +136,26 @@ export default function SearchPage() {
               className="h-24 bg-gray-200 rounded-lg dark:bg-gray-700 w-full mb-4"
             />
           ))}
-        {/* 
-        <section className="mt-8 grid grid-cols-2  max-[600px]:grid-cols-1 gap-4 px-4 mx-auto">
-          {allMessage?.data.map((item, index) => (
-            <div key={index}>
-              <Link to={`/message/${item._id}`}>
-                <CardMessage
-                  send_to={item.send_to}
-                  message={item.message}
-                  createDate={item.createdAt}
-                />
-              </Link>
-            </div>
-          ))}
-        </section> */}
+
         {allMessage?.data.length === 0 ||
-          (error && <p className="text-center">Tidak ada data</p>)}
+          (error && <p className="text-center">Tidak ada pesan saat ini</p>)}
       </div>
     </>
   );
+}
+
+{
+  /* <section className="mt-8 grid grid-cols-2  max-[600px]:grid-cols-1 gap-4 px-4 mx-auto">
+{allMessage?.data.map((item, index) => (
+  <div key={index}>
+    <Link to={`/message/${item._id}`}>
+      <CardMessage
+        send_to={item.send_to}
+        message={item.message}
+        createDate={item.createdAt}
+      />
+    </Link>
+  </div>
+))}
+</section> */
 }

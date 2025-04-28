@@ -11,6 +11,7 @@ export const getMessage = ({ queryKey }) => {
     isLoading,
     error,
     refetch,
+    isError,
   } = useQuery({
     queryKey: [key, page, limit],
     // queryKey: [queryKey],
@@ -35,5 +36,5 @@ export const getMessage = ({ queryKey }) => {
     refetchOnWindowFocus: false,
   });
 
-  return { allMessage, isLoading, error, refetch };
+  return { allMessage, isLoading, error, refetch, isError };
 };

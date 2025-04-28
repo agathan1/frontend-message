@@ -21,6 +21,7 @@ export default function HistoryMessage() {
         </div>
 
         <section className="mt-8 grid grid-cols-2  max-[600px]:grid-cols-1 gap-4 px-4 mx-auto">
+        {/* <section className="mt-8 grid grid-cols-2  max-[600px]:grid-cols-1 gap-4 px-4 mx-auto"> */}
           {myMessage?.data.map((item, index) => (
             <Link to={`/message/${item._id}`}>
               <div key={index}>

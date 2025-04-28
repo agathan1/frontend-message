@@ -4,9 +4,9 @@ import CardMessage from "../../components/molecule/CardMessage";
 import FeatureCard from "../../components/molecule/FeatureCard";
 import Marquee from "react-fast-marquee";
 import { getMessage } from "../../query/useMessage/getMessage";
+import Skeleton from "../../components/molecule/Skeleton";
 
 // line-clamp-2
-
 
 const featureMenu = [
   {
@@ -31,7 +31,7 @@ const featureMenu = [
 // <div class="max-[600px]:bg-sky-300 min-[320px]:text-center"> contoh penggunaan media query inline
 
 export default function HomePages() {
-  const { allMessage, error, isLoading } = getMessage({
+  const { allMessage, error, isLoading, isError } = getMessage({
     queryKey: ["getMessageHomePage", 1, 6],
   });
   const navigate = useNavigate();
@@ -44,6 +44,8 @@ export default function HomePages() {
     navigate("/Search");
   };
 
+  console.log("allMessage", allMessage?.data);
+  
   return (
     <>
       <div className="sm:max-w-[70%] mx-auto px-4 space-y-8">
@@ -87,7 +89,7 @@ export default function HomePages() {
         ))} */}
       </section>
 
-      <div className="my-18">
+      <div className="my-18 ">
         {/* Marquee ke kiri */}
         <Marquee
           speed={40}
@@ -97,8 +99,8 @@ export default function HomePages() {
           className="mt-10"
           pauseOnClick
         >
-          <div className="flex gap-4 px-4">
-            {allMessage?.data.map((data, index) => (
+          <div className="flex space-x-4 mx-2">
+            {allMessage?.data?.map((data, index) => (
               // <Link to={`/message/${data._id}`} key={index}>
                 <CardMessage
                   key={`left-${index}`}
@@ -106,15 +108,21 @@ export default function HomePages() {
                   message={data.message}
                   createDate={data.createdAt}
                 />
-              // {/* </Link> */}
+              // </Link>
             ))}
           </div>
         </Marquee>
 
         {/* Marquee ke kanan */}
-        <Marquee speed={40} gradient={false} direction="right" className="mt-4" pauseOnClick>
-          <div className="flex gap-4 px-4">
-            {(allMessage?.data)?.map((data, index) => (
+        <Marquee
+          speed={40}
+          gradient={false}
+          direction="right"
+          className="mt-4"
+          pauseOnClick
+        >
+          <div className="flex gap-4 mx-2">
+            {allMessage?.data?.map((data, index) => (
               // <Link to={`/message/${data._id}`} key={index}>
                 <CardMessage
                   key={`right-${index}`}
@@ -127,6 +135,29 @@ export default function HomePages() {
           </div>
         </Marquee>
       </div>
+
+      {isLoading && (
+        <div className="my-18">
+          {[...Array(2)].map((_, index) => (
+          <Skeleton
+            key={index}
+            className="h-50 bg-gray-200 rounded-lg dark:bg-gray-700 w-full mb-4"
+          />
+          ))}
+        </div>
+      )}
+
+      {allMessage?.data === undefined && (
+        <div className="my-18">
+          <p className="text-center text-2xl text-secondary font-poppins">Opps.. Maaf pesan masih kosong</p>
+          {/* {[...Array(2)].map((_, index) => (
+          <Skeleton
+            key={index}
+            className="h-50 bg-gray-200 rounded-lg dark:bg-gray-700 w-full mb-4"
+          />
+          ))} */}
+        </div>
+      )}
     </>
   );
 }

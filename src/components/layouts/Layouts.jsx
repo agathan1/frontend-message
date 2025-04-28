@@ -12,7 +12,7 @@ export default function Layouts() {
       <div className="container mx-auto min-h-screen mt-8 ">
         <Outlet />
       </div>
-      <div className="mt-10">
+      <div className="">
         <Footer />
       </div>
     </div>
