@@ -27,7 +27,7 @@ export default function RegisterPage({
           <Fieldset className="bg-black/5 p-6 sm:p-10">
             <div className="space-y-8">
               <Legend className="text-2xl/7 font-semibold text-black font-poppins text-center">
-                Login Fessaage
+                Register Fessaage
               </Legend>
               <Field>
                 <Label className="text-sm/6 font-medium text-black">

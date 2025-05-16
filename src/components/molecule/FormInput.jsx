@@ -7,16 +7,19 @@ export default function FormInput({
   onChanngeSendTo,
   onSubmit,
   isLoading,
+  labelPertama,
+  labelKedua,
 }) {
   return (
     <>
-      <form onSubmit={onSubmit} className="space-y-8">
+      <form onSubmit={onSubmit} className="space-y-8 w-full">
         <div>
           <label
             htmlFor=""
             className="block mb-2 text-lg font-poppins font-medium text-gray-900"
           >
-            Pesan Untuk
+            
+            {labelPertama}
           </label>
           <input
           value={sendTo}
@@ -31,7 +34,8 @@ export default function FormInput({
             htmlFor=""
             className="block mb-2 text-lg font-poppins font-medium text-gray-900"
           >
-            Isi Pesan
+            
+            {labelKedua}
           </label>
           <textarea
             value={mainMessage}

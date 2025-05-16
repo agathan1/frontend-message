@@ -22,6 +22,7 @@ import LoginPage from "./pages/user/LoginPage.jsx";
 import MainAuthPage from "./pages/user/MainAuthPage.jsx";
 import DetailMessage from "./pages/user/DetailMessage.jsx";
 import HistoryMessage from "./pages/user/HistoryMessage.jsx";
+import CommentPage from "./pages/user/CommentPage.jsx";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/Search" element={<SearchPage />} />
           <Route path="/message/:id" element={<DetailMessage />} />
           <Route path="/History" element={<HistoryMessage />} />
+          <Route path="/Comment" element={<CommentPage />} />
         </Route>
         <Route path="/v1">
           <Route element={<LayoutAdmin />}>

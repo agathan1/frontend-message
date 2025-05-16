@@ -44,7 +44,6 @@ export default function HomePages() {
     navigate("/Search");
   };
 
-  console.log("allMessage", allMessage?.data);
   
   return (
     <>
@@ -147,17 +146,20 @@ export default function HomePages() {
         </div>
       )}
 
-      {allMessage?.data === undefined && (
-        <div className="my-18">
-          <p className="text-center text-2xl text-secondary font-poppins">Opps.. Maaf pesan masih kosong</p>
-          {/* {[...Array(2)].map((_, index) => (
-          <Skeleton
-            key={index}
-            className="h-50 bg-gray-200 rounded-lg dark:bg-gray-700 w-full mb-4"
-          />
-          ))} */}
-        </div>
-      )}
+      
     </>
   );
 }
+
+
+// {allMessage?.data === undefined && (
+//         <div className="my-18">
+//           <p className="text-center text-2xl text-secondary font-poppins">Opps.. Maaf pesan masih kosong</p>
+//           {/* {[...Array(2)].map((_, index) => (
+//           <Skeleton
+//             key={index}
+//             className="h-50 bg-gray-200 rounded-lg dark:bg-gray-700 w-full mb-4"
+//           />
+//           ))} */}
+//         </div>
+//       )}

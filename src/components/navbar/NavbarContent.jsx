@@ -23,29 +23,30 @@ import {
 } from "@headlessui/react";
 import Swal from "sweetalert2";
 
-const menus = ["Send", "Search"];
+// const menus = ["Send", "Search"];
 const subMenus = [{ name: "Logout" }];
 
 export default function NavbarContent() {
   const navigate = useNavigate();
-  const [role, setRole] = useState("");
+  // const [role, setRole] = useState("");
+  const [menus, setMenus] = useState(["Send", "Search", "Comment"]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const username = localStorage.getItem("username");
-  useEffect(() => {
-    setTimeout(() => {
-      const userRole = localStorage.getItem("role");
-      setRole(userRole);
-      // console.log("userRole", userRole);
-    }, 2000);
-  }, []);
 
-  // role === "user" ? menus.push("History") : null;
-  if (
-    (!menus.find((menu) => menu === "History") && role === "user") ||
-    role === "admin"
-  ) {
-    menus.push("History");
-  }
+  useEffect(() => {
+    const role = localStorage.getItem("role");
+
+    // Tambahkan "History" jika role adalah "admin" atau "user"
+    // DAN jika belum ada "History" di array menus
+
+    {
+      role === "admin" || role === "user"
+        ? setMenus((prev) => [...prev, "History"])
+        : null;
+    }
+
+    console.log("menus", menus);
+  }, []);
 
   const handleLogut = () => {
     Swal.fire({
@@ -60,6 +61,8 @@ export default function NavbarContent() {
     }).then((result) => {
       if (result.isConfirmed) {
         navigate("/");
+        setMenus(["Send", "Search", "Comment" ]); // bisa di refactor
+        // setMenus((prev) => prev.pop());
         localStorage.clear();
       }
     });
@@ -170,7 +173,6 @@ export default function NavbarContent() {
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-gray-500/10">
                 <div className="space-y-2 py-6">
-
                   {menus.map((item) => (
                     <Link
                       onClick={() => setMobileMenuOpen(false)}

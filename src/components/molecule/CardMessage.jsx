@@ -14,7 +14,7 @@ export default function CardMessage({ send_to, message, createDate }) {
   };
   return (
     <>
-      <div class="flex flex-col justify-between w-full max-w-5xl h-50 border rounded-xl overflow-hidden shadow">
+      <div class="flex flex-col justify-between w-full max-w-2xl max-[750px]:max-w-xl h-50 border rounded-xl overflow-hidden shadow">
       {/* <div class="flex flex-col justify-between rounded-xl max-w-[500px] border overflow-hidden bg-card shadow"> */}
         {/* <!----> */}
         <div className="cursor-pointer flex flex-col gap-4 w-full h-full p-4 transition-colors duration-200 hover:bg-gray-50">

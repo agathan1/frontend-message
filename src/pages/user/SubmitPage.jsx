@@ -99,6 +99,8 @@ export default function SubmitPage() {
         {/* <div className="max-w-[70%] mx-auto"> */}
         <div className="mt-8">
           <FormInput
+          labelKedua={"Isi Pesan"}
+          labelPertama={"Pesan Untuk"}
             isLoading={isLoading}
             sendTo={isValue.send_to}
             mainMessage={isValue.message}

@@ -40,14 +40,14 @@ export default function DetailMessage() {
                 <p>{detailData?.data?.send_to}</p>
               </section>
               <section className="text-black justify-center flex gap-1 font-poppins font-medium text-lg">
-                <p className=" max-w-[50%] text-center max-[750px]:text-base">
+                <p className=" max-w-[50%] text-center max-[750px]:text-base max-[750px]:max-w-[80%]">
                   Ada seseorang nih yang mengirimkan pesan ke kamu. Mungkin si
                   pengirim mau berbagi sesuatu dengan kamu. Selamat membaca dan
                   semoga kamu senang.
                 </p>
               </section>
             </div>
-            <div className=" mt-22">
+            <div className="mt-22 max-[750px]:mt-10">
               <section className="space-y-8 text-secondary justify-center flex flex-col font-poppins font-medium">
                 <p className="text-center text-black">
                   Berikut isi pesan dari si pengirim:
