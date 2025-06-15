@@ -28,7 +28,8 @@ export default function LoginPage() {
       });
       setIsLoading(false);
       localStorage.setItem("role", data.user?.role);
-      localStorage.setItem("username", data.user?.username);
+      localStorage.setItem("usernameFesasage", data.user?.username);
+      localStorage.setItem("emailFessage", data.user?.email);
       localStorage.setItem("userId", data.user?.id);
       localStorage.setItem("tokenUser", data.token);
       navigate("/Send");

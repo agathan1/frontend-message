@@ -29,9 +29,9 @@ const subMenus = [{ name: "Logout" }];
 export default function NavbarContent() {
   const navigate = useNavigate();
   // const [role, setRole] = useState("");
-  const [menus, setMenus] = useState(["Send", "Search", "Comment"]);
+  const [menus, setMenus] = useState(["Send", "Search"]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const username = localStorage.getItem("username");
+  const username = localStorage.getItem("usernameFesasage");
   const role = localStorage.getItem("role");
 
   useEffect(() => {
@@ -41,11 +41,11 @@ export default function NavbarContent() {
 
     {
       role === "admin" || role === "user"
-        ? setMenus((prev) => [...prev, "History"])
+        ? setMenus((prev) => [...prev, "Comment", "History"])
         : null;
     }
 
-    console.log("menus", menus);
+    // console.log("menus", menus);
   }, [role]);
 
   const handleLogut = () => {
@@ -61,7 +61,7 @@ export default function NavbarContent() {
     }).then((result) => {
       if (result.isConfirmed) {
         navigate("/");
-        setMenus(["Send", "Search", "Comment" ]); // bisa di refactor
+        setMenus(["Send", "Search" ]); // bisa di refactor
         // setMenus((prev) => prev.pop());
         localStorage.clear();
       }
