@@ -88,7 +88,7 @@ export default function HomePages() {
         ))} */}
       </section>
 
-      <div className="my-18 ">
+      <div className="my-18 px-4">
         {/* Marquee ke kiri */}
         <Marquee
           speed={40}
@@ -136,7 +136,7 @@ export default function HomePages() {
       </div>
 
       {isLoading && (
-        <div className="my-18">
+        <div className="my-18 px-4">
           {[...Array(2)].map((_, index) => (
           <Skeleton
             key={index}

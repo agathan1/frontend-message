@@ -5,11 +5,9 @@ import {
   Input,
   Label,
   Legend,
-  Select,
-  Textarea,
 } from "@headlessui/react";
 import { useMutation } from "@tanstack/react-query";
-import React, { useState } from "react";
+import { useState } from "react";
 import { login } from "../../query/login";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
@@ -97,10 +95,10 @@ export default function LoginPage() {
             disabled={isLoading}
             type="submit"
             className={`text-white mt-8 my-auto w-full font-poppins text-lg ${
-              isLoading ? "cursor-not-allowed bg-slate-600" : "bg-black"
+              mutationLogin.isPending ? "cursor-not-allowed bg-slate-600" : "bg-black"
             } bg-blackfocus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 me-2 mb-2 focus:outline-none `}
           >
-            {isLoading ? "Loading..." : "Submit"}
+            {mutationLogin.isPending ? "Loading..." : "Login"}
           </button>
         </Fieldset>
       </form>

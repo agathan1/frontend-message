@@ -32,9 +32,9 @@ export default function NavbarContent() {
   const [menus, setMenus] = useState(["Send", "Search", "Comment"]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const username = localStorage.getItem("username");
+  const role = localStorage.getItem("role");
 
   useEffect(() => {
-    const role = localStorage.getItem("role");
 
     // Tambahkan "History" jika role adalah "admin" atau "user"
     // DAN jika belum ada "History" di array menus
@@ -46,7 +46,7 @@ export default function NavbarContent() {
     }
 
     console.log("menus", menus);
-  }, []);
+  }, [role]);
 
   const handleLogut = () => {
     Swal.fire({
@@ -71,7 +71,7 @@ export default function NavbarContent() {
   const handleLogin = () => {
     navigate("/login");
   };
-
+  
   return (
     <>
       <header className="bg-white border-gray-200 border-b-2">
@@ -116,7 +116,7 @@ export default function NavbarContent() {
                   Login
                 </NavLink>
               ) : (
-                <>
+                <div>
                   <MenuButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-secondary">
                     {username}
                     <ChevronDownIcon
@@ -135,14 +135,17 @@ export default function NavbarContent() {
                       {subMenus.map((item) => (
                         <MenuItem
                           key={item.name}
-                          className="group font-poppins relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-gray-50"
+                          className="p-2"
+                          // className="group font-poppins relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-gray-50"
                         >
-                          {item.name === "Logout" && <button>Logout</button>}
+                          <button className="text-start w-full items-center gap-2 rounded-lg px-3 py-1.5 data-focus:bg-white/40 text-white font-poppins">{item.name}</button>
+                          {/* {item.name} */}
+                          {/* {item.name === "Logout" && <button>Logout</button>} */}
                         </MenuItem>
                       ))}
                     </div>
                   </MenuItems>
-                </>
+                </div>
               )}
             </Menu>
           </PopoverGroup>

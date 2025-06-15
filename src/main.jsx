@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+import { StrictMode, lazy } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router";
@@ -22,7 +22,9 @@ import LoginPage from "./pages/user/LoginPage.jsx";
 import MainAuthPage from "./pages/user/MainAuthPage.jsx";
 import DetailMessage from "./pages/user/DetailMessage.jsx";
 import HistoryMessage from "./pages/user/HistoryMessage.jsx";
-import CommentPage from "./pages/user/CommentPage.jsx";
+// import CommentPage from "./pages/user/CommentPage.jsx";
+
+const AvatarComponent = lazy(() => import("./pages/user/CommentPage.jsx"));
 
 const queryClient = new QueryClient();
 
@@ -31,7 +33,7 @@ createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       {/* <StrictMode> */}
       <Routes>
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path="*" element={<NotFoundPage />} /> 
         <Route path="/login" element={<MainAuthPage />} />
         <Route path="/" element={<Layouts />}>
           <Route index element={<HomePages />} />
@@ -39,7 +41,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/Search" element={<SearchPage />} />
           <Route path="/message/:id" element={<DetailMessage />} />
           <Route path="/History" element={<HistoryMessage />} />
-          <Route path="/Comment" element={<CommentPage />} />
+          <Route path="/Comment" element={<AvatarComponent />} />
         </Route>
         <Route path="/v1">
           <Route element={<LayoutAdmin />}>

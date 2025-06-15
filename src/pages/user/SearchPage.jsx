@@ -102,7 +102,7 @@ export default function SearchPage() {
         {/* JIKA ISEARCH = TRUE MAKA AKAN MENAMPILKAN DATA DARI "ISRESULTSEARCH". NAMUN, JIKA ISSEARCH = FALSE MAKA AKAN MENAMPILKAN DATA DARI "SURAH" */}
         <section className="mt-8 grid grid-cols-2  max-[600px]:grid-cols-1 max-[600px]:px-4 gap-4 px-4 mx-auto">
           {(isSearch ? isResultSearch : allMessage?.data)?.map((item) => (
-            <>
+            <section key={item._id}>
               <div className="mb-4">
                 <Link to={`/message/${item._id}`}>
                   <CardMessage
@@ -112,7 +112,7 @@ export default function SearchPage() {
                   />
                 </Link>
               </div>
-            </>
+            </section>
           ))}
         </section>
 
